@@ -6,10 +6,11 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from detect import Streak
-from astride.utils.logger import Logger
+from utils.logger import Logger
+import cv2
 
 
-def test():
+def testthingy():
     print('hello')
     logger = Logger().getLogger()
 
@@ -40,8 +41,10 @@ def test():
 
     # file_path = '/Users/kim/Downloads/for_dwkim_2022_06_30/fits/' \
     #             '2022_06_29_16_14_01_000_011107-stacked-tn1657066011.fits'
-    file_path = '/home/charles/school/barrett_thesis/main_project/satellite-streak-mitigation/lib/ASTRiDE/astride/datasets/samples/long.fits'
-    streak = Streak(file_path)
+    file_path = 'datasets/samples/long.fits'
+    #streak = Streak(file_path)
+    image = cv2.imread("datasets/samples/img_0.png", cv2.IMREAD_GRAYSCALE)
+    streak = Streak(filename="datasets/samples/img_0.png",image=image)
 
     logger.info('Search streaks..')
     streak.detect()
@@ -64,4 +67,4 @@ def test():
 
 
 if __name__ == '__main__':
-    test()
+    testthingy()

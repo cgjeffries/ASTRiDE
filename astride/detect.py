@@ -2,7 +2,8 @@ import os
 import sys
 
 import numpy as np
-import pylab as pl
+#import pylab as pl
+import matplotlib.pylab as pl
 
 from skimage import measure
 from astropy.io import fits
@@ -49,12 +50,20 @@ class Streak:
         Path to save figures and output files. If None, the input folder name
         and base filename is used as the output folder name.
     """
-    def __init__(self, filename, remove_bkg='constant', bkg_box_size=50,
+    def __init__(self, filename=None, remove_bkg='constant', bkg_box_size=50,
                  contour_threshold=3., min_points=10, shape_cut=0.2,
                  area_cut=20., radius_dev_cut=0.5, connectivity_angle=3.,
-                 fully_connected='high', output_path=None):
-        hdulist = fits.open(filename)
-        raw_image = hdulist[0].data.astype(np.float64)
+                 fully_connected='high', output_path=None, image=None):
+
+        raw_image = None
+        hdulist = None
+        if(image is None):
+            hdulist = fits.open(filename)
+            raw_image = hdulist[0].data.astype(np.float64)
+
+        if image is not None:
+            raw_image = image
+
 
         # check WCS info
         try:
@@ -65,7 +74,8 @@ class Streak:
         except:
             self.wcsinfo = False
 
-        hdulist.close()
+        if hdulist is not None:
+            hdulist.close()
 
         # Raw image.
         self.raw_image = raw_image
