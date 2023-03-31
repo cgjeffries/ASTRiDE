@@ -13,8 +13,8 @@ from astropy import coordinates
 from astropy import units as u
 from astropy.wcs import WCS
 from photutils import Background2D, MedianBackground
-
-from astride.utils.edge import EDGE
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from lib.ASTRiDE.astride.utils.edge import EDGE
 
 
 class Streak:

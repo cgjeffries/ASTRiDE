@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from detect import Streak
-from astride.utils.logger import Logger
+from lib.ASTRiDE.astride.utils.logger import Logger
 
 
 def test():
